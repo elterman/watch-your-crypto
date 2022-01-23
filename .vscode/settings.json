@@ -1,0 +1,13 @@
+{
+    "window.title": "${dirty}${rootName} • ${activeEditorShort}",
+    "workbench.colorCustomizations": {
+      "titleBar.activeBackground": "#B8AF8F60",
+      "tab.inactiveBackground": "#B8AF8F60",
+      "tab.activeBackground": "#1E1E1E",
+      "tab.activeBorderTop": "#FFFCA6",
+    },
+    "terminal.integrated.cursorBlinking": true,
+    "vscode_custom_css.imports": ["file:///C:/git/Cloud-Drive/vs-code-custom.css"],
+    "vscode_custom_css.policy": true,
+    "tabsort.sortByFullPath": false
+  }
