@@ -1,52 +1,44 @@
 import './App.css';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { useEffect } from 'react';
-import { do_refresh, my_symbols, assets_data } from './atoms';
+import { my_symbols, assets_data } from './atoms';
 import _ from 'lodash';
 import Item from './Item';
 
 const ContentArea = () => {
-  const [refresh, setRefresh] = useRecoilState(do_refresh)
   const [assetsData, setAssetsData] = useRecoilState(assets_data);
   const symbols = useRecoilValue(my_symbols)
 
-  useEffect(() => {
-    if (!refresh) {
-      return;
-    }
+  const doFetch = (i = 0, adata = {}) => {
+    const symbol = symbols[i];
+    const url = `https://data.messari.io/api/v1/assets/${symbol}/metrics/market-data`;
 
-    setRefresh(false);
+    fetch(url)
+      .then((res) => {
+        return res.ok ? res.json() : Promise.reject({ status: res.status, message: res.statusText });
+      })
+      .then((data) => {
+        const d = data.data;
+        adata[symbol] = { data: d, prev_price: adata[symbol]?.data.market_data.price_usd };
 
-    const doFetch = (i = 0, adata = {}) => {
-      const symbol = symbols[i];
-      const url = `https://data.messari.io/api/v1/assets/${symbol}/metrics/market-data`;
+        let ms = 0;
 
-      fetch(url)
-        .then((res) => {
-          return res.ok ? res.json() : Promise.reject({ status: res.status, message: res.statusText });
-        })
-        .then((data) => {
-          const d = data.data;
-          adata[symbol] = { data: d, prev_price: adata[symbol]?.data.market_data.price_usd };
+        if (i === symbols.length - 1) {
+          setAssetsData({ ...adata });
 
-          let ms = 10;
+          i = -1;
+          ms = 5000;
+        }
 
-          if (i === symbols.length - 1) {
-            setAssetsData({ ...adata });
+        setTimeout(() => doFetch(++i, adata), ms);
+      })
+      .catch((err) => {
+        alert(err.status);
+      });
+  };
 
-            i = -1;
-            ms = 5000;
-          }
-
-          setTimeout(() => doFetch(++i, adata), ms);
-        })
-        .catch((err) => {
-          alert(err.status);
-        });
-    }
-
+  if (_.isEmpty(assetsData)) {
     doFetch();
-  }, [assetsData, refresh, setAssetsData, setRefresh, symbols])
+  };
 
   return <div className='app'>
     <div style={{ padding: '10px' }}>

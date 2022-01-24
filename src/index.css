@@ -14,8 +14,8 @@ code {
 
 .app {
   background: #222;
-  font-family: "Roboto Mono";
-  font-size: 20px;
+  font-family: "Roboto";
+  font-size: 21px;
   height: 100vh;
   display: grid;
   place-content: start;
