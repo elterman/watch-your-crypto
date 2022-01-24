@@ -35,7 +35,6 @@ const ContentArea = () => {
             setAssetsData({ ...adata });
 
             i = -1;
-            // adata = {};
             ms = 5000;
           }
 

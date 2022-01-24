@@ -22,9 +22,10 @@ code {
 }
 
 .item {
-  padding: 8px 10px;
+  padding: 10px;
   display: grid;
-  grid: auto / 75px 120px 100px 100px;
+  align-items: center;
+  grid: auto / 50px 75px 120px 100px 100px;
   grid-auto-flow: column;
   color: #b8af8f;
   cursor: pointer;
@@ -32,5 +33,5 @@ code {
 }
 
 .item:hover {
-  border: 1px groove #fff8;
+  border: 1px groove #b8af8f;
 }
