@@ -3,7 +3,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { useEffect } from 'react';
 import { do_refresh, my_symbols, assets_data } from './atoms';
 import _ from 'lodash';
-import { formatPercent } from './utils';
+import Item from './Item';
 
 const ContentArea = () => {
   const [refresh, setRefresh] = useRecoilState(do_refresh)
@@ -27,15 +27,15 @@ const ContentArea = () => {
         })
         .then((data) => {
           const d = data.data;
-          adata[symbol] = { data: d, up: d.market_data.price_usd >= assetsData[symbol]?.market_data.price_usd };
+          adata[symbol] = { data: d, prev_price: adata[symbol]?.data.market_data.price_usd };
 
-          let ms = 100;
+          let ms = 10;
 
           if (i === symbols.length - 1) {
-            setAssetsData(adata);
+            setAssetsData({ ...adata });
 
             i = -1;
-            adata = {};
+            // adata = {};
             ms = 5000;
           }
 
@@ -49,24 +49,11 @@ const ContentArea = () => {
     doFetch();
   }, [assetsData, refresh, setAssetsData, setRefresh, symbols])
 
-  return <div style={{ background: '#123', fontFamily: 'Roboto Mono', fontSize: '18px', height: '100vh', display: 'grid', placeContent: 'start center', overflow: 'hidden' }}>
-    {_.map(assetsData, (ob) => {
-      const data = ob.data.market_data;
-      const last1 = data.percent_change_usd_last_1_hour;
-      const last24 = data.percent_change_usd_last_24_hours;
-
-      return (
-        <div key={ob.data.symbol} style={{ padding: '5px', display: 'grid', grid: 'auto / 55px 110px 80px 80px', gridAutoFlow: 'column', color: '#B8AF8F' }}>
-          <span>{ob.data.symbol}</span>
-          <span style={{ color: ob.up > 0 ? '#56BF8B' : '#F4425A', justifySelf: 'end' }}>{data.price_usd.toFixed(4)}</span>
-          <span style={{ color: last1 > 0 ? '#56BF8B' : '#F4425A', justifySelf: 'end' }}>{formatPercent(last1 / 100)}</span>
-          <span style={{ color: last24 > 0 ? '#56BF8B' : '#F4425A', justifySelf: 'end' }}>{formatPercent(last24 / 100)}</span>
-        </div>
-      )
-    })}
-    <a href="https://messari.io/" style={{ textDecoration: 'none', color: '#fff4', fontSize: '14px' }}>Powered by Messari</a>
+  return <div className='app'>
+    <div style={{ padding: '10px' }}>
+      {!_.isEmpty(assetsData) && _.map(symbols, (symbol, i) => <Item key={i} symbol={symbol} index={i} />)}
+    </div>
   </div>;
-
 }
 
 export default ContentArea;
