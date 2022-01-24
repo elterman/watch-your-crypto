@@ -49,7 +49,7 @@ const ContentArea = () => {
     doFetch();
   }, [assetsData, refresh, setAssetsData, setRefresh, symbols])
 
-  return <div style={{ background: '#123', fontFamily: 'Roboto Mono', fontSize: '18px', height: '100vh', display: 'grid', placeContent: 'start center', padding: '10px 0' }}>
+  return <div style={{ background: '#123', fontFamily: 'Roboto Mono', fontSize: '18px', height: '100vh', display: 'grid', placeContent: 'start center', overflow: 'hidden' }}>
     {_.map(assetsData, (ob) => {
       const data = ob.data.market_data;
       const last1 = data.percent_change_usd_last_1_hour;
