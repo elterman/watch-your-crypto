@@ -20,7 +20,7 @@ const ContentArea = () => {
         const d = data.data;
         adata[symbol] = { data: d, prev_price: adata[symbol]?.data.market_data.price_usd };
 
-        let ms = 0;
+        let ms = 10;
 
         if (i === symbols.length - 1) {
           setAssetsData({ ...adata });

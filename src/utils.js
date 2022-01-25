@@ -15,3 +15,11 @@ export const formatPercent = (value ) => {
         maximumFractionDigits: 2,
     }).format(value);
 };
+
+export const formatDecimal = (value, precision) => {
+    return Intl.NumberFormat('en-US', {
+        style: 'decimal',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: precision,
+    }).format(value);
+};

@@ -1,6 +1,6 @@
 import { useRecoilValue } from 'recoil';
 import { assets_data } from './atoms';
-import { formatPercent } from './utils';
+import { formatDecimal, formatPercent } from './utils';
 import { useSpring, animated } from 'react-spring';
 import btc from './logos/btc.svg'
 import eth from './logos/eth.svg'
@@ -30,9 +30,9 @@ const Item = (props) => {
     return (
         <div key={symbol} className='item' style={{ background }}
             onClick={() => window.open(`https://messari.io/asset/${symbol}`, '_blank')}>
-            <img src={logos[index]} alt='logo' width={30} height={30}/>
+            <img src={logos[index]} alt='logo' width={30} height={30} />
             <span>{ob.data.symbol}</span>
-            <animated.span style={dstyle(once ? 0 : data.price_usd > ob.prev_price ? 1 : -1)}>{data.price_usd.toFixed(4)}</animated.span>
+            <animated.span style={dstyle(once ? 0 : data.price_usd > ob.prev_price ? 1 : -1)}>{formatDecimal(data.price_usd, 4)}</animated.span>
             <span style={dstyle(last1 > 0 ? 1 : -1)}>{formatPercent(last1 / 100)}</span>
             <span style={dstyle(last24 > 0 ? 1 : -1)}>{formatPercent(last24 / 100)}</span>
         </div>
