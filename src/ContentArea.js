@@ -32,7 +32,7 @@ const ContentArea = () => {
         setTimeout(() => doFetch(++i, adata), ms);
       })
       .catch((err) => {
-        alert(err.status);
+        alert(err.status || err.message || err.code);
       });
   };
 
