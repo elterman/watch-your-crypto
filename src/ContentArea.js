@@ -3,6 +3,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { my_symbols, assets_data } from './atoms';
 import _ from 'lodash';
 import Item from './Item';
+import { formatDecimal } from './utils';
 
 const ContentArea = () => {
   const [assetsData, setAssetsData] = useRecoilState(assets_data);
@@ -27,6 +28,8 @@ const ContentArea = () => {
 
           i = -1;
           ms = 5000;
+
+          document.title = formatDecimal(adata['BTC']?.data.market_data.price_usd, 2);
         }
 
         setTimeout(() => doFetch(++i, adata), ms);
