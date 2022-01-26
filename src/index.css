@@ -35,3 +35,14 @@ code {
 .item:hover {
   border: 1px groove #b8af8f;
 }
+
+#messari {
+  justify-self: center;
+  padding: 20px;
+  cursor: pointer;
+  border: 1px groove #0000;
+}
+
+#messari:hover {
+  border: 1px groove #b8af8f;
+}
