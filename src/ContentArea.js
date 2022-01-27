@@ -29,7 +29,7 @@ const ContentArea = () => {
           i = -1;
           ms = 5000;
 
-          document.title = formatDecimal(adata['BTC']?.data.market_data.price_usd, 2);
+          document.title = `BTC • ${formatDecimal(adata['BTC'].data.market_data.price_usd, 2)}`;
         }
 
         setTimeout(() => doFetch(++i, adata), ms);
@@ -44,7 +44,7 @@ const ContentArea = () => {
   };
 
   return <div className='app'>
-    <div style={{ padding: '10px', display: 'grid' }}>
+    <div id='content'>
       <img id='messari'  src='https://messari.io/images/Messari_icon_36x36.svg' alt='messari.io'
         onClick={() => window.open(`https://messari.io`, '_blank')}
       />

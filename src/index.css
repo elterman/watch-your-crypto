@@ -21,6 +21,12 @@ code {
   place-content: start;
 }
 
+#content {
+  padding: 10px;
+  display: grid;
+  min-width: 487px;
+}
+
 .item {
   padding: 10px;
   display: grid;
