@@ -35,7 +35,8 @@ const ContentArea = () => {
         setTimeout(() => doFetch(++i, adata), ms);
       })
       .catch((err) => {
-        alert(err.status || err.message || err.code);
+        console.log(err.status || err.message || err.code);
+        doFetch();
       });
   };
 
@@ -45,7 +46,7 @@ const ContentArea = () => {
 
   return <div className='app'>
     <div id='content'>
-      <img id='messari'  src='https://messari.io/images/Messari_icon_36x36.svg' alt='messari.io'
+      <img id='messari' src='https://messari.io/images/Messari_icon_36x36.svg' alt='messari.io'
         onClick={() => window.open(`https://messari.io`, '_blank')}
       />
       {!_.isEmpty(assetsData) && _.map(symbols, (symbol, i) => <Item key={i} symbol={symbol} index={i} />)}
