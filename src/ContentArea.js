@@ -44,7 +44,7 @@ const ContentArea = () => {
     doFetch();
   };
 
-  return <div className='app'>
+  return <div className='app root-scroll'>
     <div id='content'>
       <img id='messari' src='https://messari.io/images/Messari_icon_36x36.svg' alt='messari.io'
         onClick={() => window.open(`https://messari.io`, '_blank')}
