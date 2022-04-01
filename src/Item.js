@@ -10,14 +10,14 @@ import nano from './logos/nano.svg'
 import link from './logos/link.svg'
 import ltc from './logos/ltc.svg'
 import xlm from './logos/xlm.svg'
-import aave from './logos/aave.svg'
+import midas from './logos/midas.svg'
 
 const Item = (props) => {
     const { symbol, index } = props;
     const assetsData = useRecoilValue(assets_data);
     const { opacity } = useSpring({ opacity: 1, from: { opacity: 0.5 }, reset: true });
 
-    const logos = [btc, eth, algo, ada, nano, link, ltc, xlm, aave];
+    const logos = [btc, eth, algo, ada, nano, link, ltc, xlm, midas];
     const ob = assetsData[symbol];
     const once = ob.prev_price === undefined;
     const data = ob.data.market_data;
