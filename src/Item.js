@@ -31,7 +31,7 @@ const Item = (props) => {
         <div key={symbol} className='item' style={{ background }}
             onClick={() => window.open(`https://messari.io/asset/${symbol}`, '_blank')}>
             <img src={logos[index]} alt='logo' width={30} height={30} />
-            <span>{ob.data.symbol}</span>
+            <span>{ob.data.Asset.symbol}</span>
             <animated.span style={dstyle(once ? 0 : data.price_usd > ob.prev_price ? 1 : -1)}>{formatDecimal(data.price_usd, 4)}</animated.span>
             <span style={dstyle(last1 > 0 ? 1 : -1)}>{formatPercent(last1 / 100)}</span>
             <span style={dstyle(last24 > 0 ? 1 : -1)}>{formatPercent(last24 / 100)}</span>
