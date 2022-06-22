@@ -1,2 +1,2 @@
-start "" http://localhost:3000/
-serve
+start "" http://localhost:9601/
+serve -l 9601
